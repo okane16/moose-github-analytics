@@ -10,6 +10,10 @@ export default async function run(
 
   const repositories = await callGitHubAPI(source.sender.repos_url);
 
+  if (!repositories) {
+    return null;
+  }
+
   const stargazerProjects = repositories.map((repo: any) => ({
     starred_at: new Date(source.starred_at),
     stargazerName: source.sender.login,
@@ -19,7 +23,8 @@ export default async function run(
     repoUrl: repo.html_url,
     repoStars: repo.stargazers_count,
     repoWatchers: repo.watchers_count,
-    language: repo.language,
+    language: repo.language || "Multiple Languages",
+    languagesUrl: repo.languages_url,
     repoSizeKb: repo.size,
     createdAt: new Date(repo.created_at),
     updatedAt: new Date(repo.updated_at),

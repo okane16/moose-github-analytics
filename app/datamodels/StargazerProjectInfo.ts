@@ -11,6 +11,7 @@ export interface StargazerProjectInfo {
   repoStars: number;
   repoWatchers: number;
   language: string;
+  languagesUrl: string;
   createdAt: Date;
   updatedAt: Date;
 }
